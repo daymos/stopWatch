@@ -11,9 +11,9 @@
 10 silly runTopLevelLifecycles Finishing
 11 silly install printInstalled
 12 verbose stack Error: Failed to parse json
-12 verbose stack Unexpected token 'd' at 11:4
-12 verbose stack   "devDependencies":{
-12 verbose stack    ^
+12 verbose stack Unexpected token ',' at 11:2
+12 verbose stack },
+12 verbose stack  ^
 12 verbose stack     at parseError (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:390:11)
 12 verbose stack     at parseJson (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:79:23)
 12 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:48:5
@@ -28,9 +28,9 @@
 18 error file /Users/mattia/FAC8/week2/stopWatch/package.json
 19 error code EJSONPARSE
 20 error Failed to parse json
-20 error Unexpected token 'd' at 11:4
-20 error   "devDependencies":{
-20 error    ^
+20 error Unexpected token ',' at 11:2
+20 error },
+20 error  ^
 21 error File: /Users/mattia/FAC8/week2/stopWatch/package.json
 22 error Failed to parse package.json data.
 22 error package.json must be actual JSON, not just JavaScript.
