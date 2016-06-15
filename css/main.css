@@ -1,0 +1,46 @@
+* {
+	box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+#page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -50px; 
+  position:relative;
+}
+#page-wrap:after {
+  content: "";
+  display: block;
+}
+#footer {
+  height: 50px; 
+}
+#display{
+	position:relative;
+	background-color: lightblue;
+	min-height: 100%;
+}
+.inline{
+	display: inline-block;
+	padding: 3px 30px 3px 30px;
+	margin: 0px 15px 0px 15px;
+	background-color: lightgrey;
+}
+#laps{
+	background-color: lightpink;
+}
+
+#buttons{
+	text-align: center;
+	background-color: lightgreen;
+	padding: 5px 0 5px 0;
+}
+#display svg{
+	position:relative;
+	display:inline-block;
+	width: 10%;
+	height: 10%;
+}
+
