@@ -11,6 +11,6 @@
 	"devDependencies":{
 		"yo":"*",
 		"bower":"*",
-		"generator-jasmine":"8"       
+		"generator-jasmine":"*"       
 	}
 }
