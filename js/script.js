@@ -8,9 +8,10 @@ var Watch = {
 	interval: undefined,
 	lapArray: [],
 	reset: function(){
-		return this.stop()
+		var laps = this.stop()
 		this.timeElapsed = 0;	
 		this.lapArray = [];
+		return laps
 	},
 	start: function(){
 		if(!this.isRunning){
