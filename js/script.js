@@ -8,90 +8,93 @@ var Watch = {
 	interval: undefined,
 	lapArray: [],
 	reset: function(){
-			this.timeElapsed = 0;	
-		},
-		start: function(){
-			if(!this.isRunning){
-				this.isRunning = 1;
-				var drawCount = 0
-				var fillCount = 0
-				var callback = () => {
-					this.timeElapsed +=5;	
-					drawCount+=5
-					fillCount+=5
-					if (drawCount >=1000){
-						this.draw()
-						drawCount = 0
-						fillCount = 0
-					}
-					if (fillCount<=500){
-						//		this.fill()
-					}
+		this.stop()
+		this.timeElapsed = 0;	
+		this.lapArray = [];
+	},
+	start: function(){
+		if(!this.isRunning){
+			this.isRunning = 1;
+			var drawCount = 0
+			var fillCount = 0
+			var callback = () => {
+				this.timeElapsed +=5;	
+				drawCount+=5
+				fillCount+=5
+				if (drawCount >=1000){
+					this.draw()
+					drawCount = 0
+					fillCount = 0
 				}
-				this.interval = setInterval(callback, 5);
+				if (fillCount<=500){
+					//		this.fill()
+				}
 			}
-		},
-		stop: function(){
-			if(this.isRunning){
-				this.isRunning = 0;	
-				clearInterval(this.interval);
-			}
-		},
-		lap: function(){
-			if(this.isRunning){
-				var record = this.timeElapsed;
-				this.lapArray.push(record)
-				return record;
-			}
-		},
-		getTime: function(){
-			var totalSeconds = this.timeElapsed/1000;
-			var minutes = Math.floor(totalSeconds/60);
-			var seconds = Math.floor(totalSeconds % 60);
-			var output = [];
-			if (minutes<10){
-				console.log('mins', minutes)
-				output.push(svg[0]);
-				output.push(svg[minutes]);
-			} else {
-				output.push(svg[minutes.toString()[0]]);
-				output.push(svg[minutes.toString()[1]]);
-			}
-			output.push(svg[10]);
-			if (seconds<10){
-				console.log('secs', seconds)
-				output.push(svg[0]);
-				output.push(svg[seconds]);
-			} else {
-				output.push(svg[seconds.toString()[0]]);
-				output.push(svg[seconds.toString()[1]]);
-			}
-			console.log('length of return arr', output.length)
-			return output
-		},
-		draw: function(){
-			var displayTime = this.getTime()
-			displayTime.forEach(function(el,index){
-				path = document.getElementById('digit'+index)
-				path.setAttributeNS(null, "d", el);
-				console.log('el',el)
-			})
-		},
-		fill: function(){
-			var randX = Math.floor(Math.random()*825)
-			var randY = Math.floor(Math.random()*1100-100)
-			var index = Math.floor(Math.random()*5)
-			var svgNS = "http://www.w3.org/2000/svg";
-			svg = document.getElementById('svg'+index)
-			var rect = document.createElementNS(svgNS,"rectangle");
-			rect.setAttributeNS(null, "width", "2");
-			rect.setAttributeNS(null, "height", "2");
-			rect.setAttributeNS(null, "x", randX);
-			rect.setAttributeNS(null, "y", randY);
-			rect.setAttributeNS(null, "fill", "black");
-			svg.appendChild(rect);
+			this.interval = setInterval(callback, 5);
 		}
+	},
+	stop: function(){
+		if(this.isRunning){
+			this.isRunning = 0;	
+			clearInterval(this.interval);
+			return this.lapArray
+		}
+	},
+	lap: function(){
+		if(this.isRunning){
+			var record = this.timeElapsed;
+			this.lapArray.push(record)
+			return record;
+		}
+	},
+	getTime: function(){
+		var totalSeconds = this.timeElapsed/1000;
+		var minutes = Math.floor(totalSeconds/60);
+		var seconds = Math.floor(totalSeconds % 60);
+		var output = [];
+		if (minutes<10){
+			console.log('mins', minutes)
+			output.push(svg[0]);
+			output.push(svg[minutes]);
+		} else {
+			output.push(svg[minutes.toString()[0]]);
+			output.push(svg[minutes.toString()[1]]);
+		}
+		output.push(svg[10]);
+		if (seconds<10){
+			console.log('secs', seconds)
+			output.push(svg[0]);
+			output.push(svg[seconds]);
+		} else {
+			output.push(svg[seconds.toString()[0]]);
+			output.push(svg[seconds.toString()[1]]);
+		}
+		console.log('length of return arr', output.length)
+		return output
+	},
+	draw: function(){
+		var displayTime = this.getTime()
+		displayTime.forEach(function(el,index){
+			path = document.getElementById('digit'+index)
+			path.setAttributeNS(null, "d", el);
+			console.log('el',el)
+		})
+	},
+	fill: function(){
+		var randX = Math.floor(Math.random()*825)
+		var randY = Math.floor(Math.random()*1100-100)
+		var index = Math.floor(Math.random()*5)
+		var svgNS = "http://www.w3.org/2000/svg";
+		svg = document.getElementById('svg'+index)
+		var rect = document.createElementNS(svgNS,"rectangle");
+		rect.setAttributeNS(null, "width", "2");
+		rect.setAttributeNS(null, "height", "2");
+		rect.setAttributeNS(null, "x", randX);
+		rect.setAttributeNS(null, "y", randY);
+		rect.setAttributeNS(null, "fill", "black");
+		svg.appendChild(rect);
 	}
+}
 
 var svg = ['M71 412c0 286 159 428 336 428s335 -142 335 -428c0 -306 -158 -427 -335 -427s-336 121 -336 427zM261 412c0 -178 55 -262 146 -262c90 0 145 84 145 262c0 167 -55 263 -145 263c-91 0 -146 -97 -146 -263z',
 	'M29 487v186l235 152h89v-825h-188v575z',
