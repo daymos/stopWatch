@@ -16,7 +16,7 @@ var Watch = {
 			var callback = () => {
 				this.timeElapsed +=5;	
 				counter+=5
-				if (counter >=6000){
+				if (counter >=1000){
 					this.draw()
 					counter = 0
 				}
@@ -51,16 +51,15 @@ var Watch = {
 				output.push(svg[0]);
 				output.push(svg[seconds]);
 			} else {
-				output.push(svg[minutes.toString()[0]]);
-				output.push(svg[minutes.toString()[1]]);
+				output.push(svg[seconds.toString()[0]]);
+				output.push(svg[seconds.toString()[1]]);
 			}
+			console.log('length of return arr', output.length)
 			return output
 		},
 		draw: function(){
 			var displayTime = this.getTime()
-			console.log('digitarray: ', displayTime)
 			displayTime.forEach(function(el,index){
-				console.log(el)
 				path = document.getElementById('digit'+index)
 				path.setAttributeNS(null, "d", el);
 			})
