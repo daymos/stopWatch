@@ -37,6 +37,15 @@ var Watch = {
 		if(this.isRunning){
 			this.isRunning = 0;	
 			clearInterval(this.interval);
+			var lapString = 'Laps: '
+			this.lapArray.forEach(function(lap, i){
+				if(i>0){
+					lapString += ', '+ (lap/1000) + ' secs'
+				} else {
+					lapString += (lap/1000) + ' secs'
+				}
+			})
+			document.getElementById('laps').innerHTML = lapString
 			return this.lapArray
 		}
 	},
