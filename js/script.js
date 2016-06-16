@@ -12,11 +12,16 @@ var Watch = {
 		},
 		start: function(){
 			this.isRunning = 1;
+			var counter = 0
 			var callback = () => {
 				this.timeElapsed +=5;	
+				counter+=5
+				if (counter >=6000){
+					this.draw()
+					counter = 0
+				}
 			}
 			this.interval = setInterval(callback, 5);
-
 		},
 		stop: function(){
 			this.isRunning = 0;	
@@ -53,14 +58,16 @@ var Watch = {
 		},
 		draw: function(){
 			var displayTime = this.getTime()
+			console.log('digitarray: ', displayTime)
 			displayTime.forEach(function(el,index){
+				console.log(el)
 				path = document.getElementById('digit'+index)
 				path.setAttributeNS(null, "d", el);
 			})
-			var startTime = this. timeElapsed
-			while(this.timeElapsed<(startTime+500)){
-				setTimeout(this.fill(), 5)
-			}
+			var startTime = this.timeElapsed
+		//	while(this.timeElapsed<(startTime+500)){
+		//		setTimeout(this.fill(), 5)
+		//	}
 		},
 		fill: function(){
 			var randX = Math.floor(Math.random()*825)
@@ -68,8 +75,6 @@ var Watch = {
 			var index = Math.floor(Math.random()*5)
 			var svgNS = "http://www.w3.org/2000/svg";
 			var svg = document.getElementById('display').childNodes[index];
-			console.log(svg)
-			debugger;
 			var rect = document.createElementNS(svgNS,"rectangle");
 			rect.setAttributeNS(null, "width", "2");
 			rect.setAttributeNS(null, "height", "2");
