@@ -8,7 +8,7 @@ var Watch = {
 	interval: undefined,
 	lapArray: [],
 	reset: function(){
-		this.stop()
+		return this.stop()
 		this.timeElapsed = 0;	
 		this.lapArray = [];
 	},
@@ -16,18 +16,12 @@ var Watch = {
 		if(!this.isRunning){
 			this.isRunning = 1;
 			var drawCount = 0
-			var fillCount = 0
 			var callback = () => {
 				this.timeElapsed +=5;	
 				drawCount+=5
-				fillCount+=5
 				if (drawCount >=1000){
 					this.draw()
 					drawCount = 0
-					fillCount = 0
-				}
-				if (fillCount<=500){
-					//		this.fill()
 				}
 			}
 			this.interval = setInterval(callback, 5);
@@ -62,7 +56,6 @@ var Watch = {
 		var seconds = Math.floor(totalSeconds % 60);
 		var output = [];
 		if (minutes<10){
-			console.log('mins', minutes)
 			output.push(svg[0]);
 			output.push(svg[minutes]);
 		} else {
@@ -71,14 +64,12 @@ var Watch = {
 		}
 		output.push(svg[10]);
 		if (seconds<10){
-			console.log('secs', seconds)
 			output.push(svg[0]);
 			output.push(svg[seconds]);
 		} else {
 			output.push(svg[seconds.toString()[0]]);
 			output.push(svg[seconds.toString()[1]]);
 		}
-		console.log('length of return arr', output.length)
 		return output
 	},
 	draw: function(){
@@ -86,22 +77,42 @@ var Watch = {
 		displayTime.forEach(function(el,index){
 			path = document.getElementById('digit'+index)
 			path.setAttributeNS(null, "d", el);
-			console.log('el',el)
 		})
+		var filling = setInterval(this.fill,0)
+		var unfillFunc = this.unfill
+		setTimeout(function(){
+			clearInterval(filling)
+			var unfilling = setInterval(unfillFunc,0)
+			setTimeout(function(){
+				clearInterval(unfilling)
+			},500)
+		}, 500, unfillFunc)
 	},
 	fill: function(){
-		var randX = Math.floor(Math.random()*825)
-		var randY = Math.floor(Math.random()*1100-100)
-		var index = Math.floor(Math.random()*5)
-		var svgNS = "http://www.w3.org/2000/svg";
-		svg = document.getElementById('svg'+index)
-		var rect = document.createElementNS(svgNS,"rectangle");
-		rect.setAttributeNS(null, "width", "2");
-		rect.setAttributeNS(null, "height", "2");
-		rect.setAttributeNS(null, "x", randX);
-		rect.setAttributeNS(null, "y", randY);
-		rect.setAttributeNS(null, "fill", "black");
-		svg.appendChild(rect);
+		for(var i = 0; i <500;i++){
+			var randX = Math.floor(Math.random()*825)
+			var randY = Math.floor(Math.random()*1100-100)
+			var index = Math.floor(Math.random()*5)
+			var svgNS = "http://www.w3.org/2000/svg";
+			var svg = document.getElementById('svg'+index)
+			var rect = document.createElementNS(svgNS,"rect");
+			rect.setAttributeNS(null, "width", "15");
+			rect.setAttributeNS(null, "height", "15");
+			rect.setAttributeNS(null, "x", randX);
+			rect.setAttributeNS(null, "y", randY);
+			rect.setAttributeNS(null, "fill", "black");
+			path = document.getElementById('digit'+index)
+			svg.insertBefore(rect, path);
+		}
+	},
+	unfill: function(){
+		for(var i = 0; i <500;i++){ 
+			var index = Math.floor(Math.random()*5)
+			var svg = document.getElementById('svg'+index)
+			if(svg.childNodes.length>1){
+				svg.removeChild(svg.firstChild)
+			} 
+		}
 	}
 }
 

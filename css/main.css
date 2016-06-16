@@ -19,7 +19,7 @@ html, body {
 }
 #display{
 	position:relative;
-	background-color: lightblue;
+	background-color: white;
 	min-height: 100%;
 }
 .inline{
