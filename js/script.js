@@ -32,13 +32,17 @@ var Watch = {
 			}
 		},
 		stop: function(){
-			this.isRunning = 0;	
-			clearInterval(this.interval);
+			if(this.isRunning){
+				this.isRunning = 0;	
+				clearInterval(this.interval);
+			}
 		},
 		lap: function(){
-			var record = this.timeElapsed;
-			this.lapArray.push(record)
-			return record;
+			if(this.isRunning){
+				var record = this.timeElapsed;
+				this.lapArray.push(record)
+				return record;
+			}
 		},
 		getTime: function(){
 			var totalSeconds = this.timeElapsed/1000;
