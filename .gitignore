@@ -1,0 +1,6 @@
+*.swo
+*.so
+*.un~
+node_modules
+bower_components
+.yo-rc.json
