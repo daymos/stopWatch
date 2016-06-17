@@ -1,29 +1,15 @@
-to setup testing environment run npm install   
+##What?
 
-then run yo jasmine
+A Stopwatch!
 
+##How?
 
-to import labels, go on you label page on github and copy paste this code in the console
+- The stopwatch is a single Javascript object `Watch` with methods `start()`, `stop()`, `lap()` and `reset()`.
+- The digits are drawn with svg paths, filled white on a white background. The paths were extracted from a font file.
+- Every second, a fill() function randomly adds rectangles behind the paths and then takes them away.
+ 
+##Testing
 
-var labels = [];
-[].slice.call(document.querySelectorAll(".label-link"))
-.forEach(function(element) {
-  labels.push({
-    name: element.textContent.trim(),
-    // using style.backgroundColor might returns "rgb(...)"
-    color: element.getAttribute("style")
-      .replace("background-color:", "")
-      .replace(/color:.*/,"")
-      .trim()
-      // github wants hex code only without # or ;
-      .replace(/^#/, "")
-      .replace(/;$/, "")
-      .trim(),
-  })
-})
-console.log(JSON.stringify(labels, null, 2))
+Adding the svg animations broke the tests. We have not figured out why!
 
 
-this will outout to console a json file save the output in your local repo. 
-then run: 
-labels -c path/to/conf.json user/repo 

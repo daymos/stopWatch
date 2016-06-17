@@ -9,6 +9,7 @@
 				expect(Watch.isRunning).toBe(1);
 				Watch.stop();
 				expect(Watch.isRunning).toBe(0);
+				Watch.reset()
 			})
 
 			it('measure the time elapsed', function(done){
@@ -16,28 +17,36 @@
 				setTimeout(function(){
 					Watch.stop(); 
 					expect(Watch.timeElapsed>10).toBe(true);
+					Watch.reset()
 					done();
 				},50)
 			})
-			it('either be restarted from 0 (reset) or restarted at the last stopped time', function(done){
+			it('be able to be restarted at the last stopped time', function(done){
 				Watch.start();
 				setTimeout(function(){
+					Watch.stop()
 					Watch.start()
 					expect(Watch.timeElapsed >= 80).toBe(true)
-					console.log('here 1: ',Watch.timeElapsed )
+					Watch.reset()
 					done()
 				}, 100)
-				Watch.reset();
-				expect(Watch.timeElapsed).toBe(0);
-				console.log('here 2:',Watch.timeElapsed)
 
 			})
-			it('return the time elapsed when partial time button is clicked it', function(done){
+			it('be able to be reset to 0', function(done){
+				Watch.start()
+				setTimeout(function(){
+					Watch.reset();
+					expect(Watch.timeElapsed).toBe(0);
+					done()
+				}, 100)
+			})
+			it('return the time elapsed when lap button is clicked it', function(done){
 				Watch.start();
 				setTimeout(function(){
 					expect(Watch.lap()>=Watch.timeElapsed).toBe(true);
 					done()
 					Watch.stop()
+					Watch.reset()
 				},50)
 			})
 			it('store successive laps and return them in an array', function(done){
@@ -52,6 +61,7 @@
 					}
 					done();
 					Watch.stop();
+					Watch.reset()
 				}, 500);
 			})
 
@@ -65,7 +75,6 @@
 				Watch.draw();
 				var elements = document.getElementsByTagName('path')
 				for(var i = 0; i < elements.length; i++){
-					console.log(elements[i].toString(), ' compare to ', Watch.getTime()[i]);
 					expect(elements[i].toString()).toBe(Watch.getTime()[i])
 				}
 

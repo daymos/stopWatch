@@ -1,7 +1,3 @@
-//setTimeout(function(){
-//	location.reload()
-//}, 5000)
-
 var Watch = {
 	isRunning: 0,
 	timeElapsed: 0,
