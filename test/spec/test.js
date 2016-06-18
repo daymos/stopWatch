@@ -5,77 +5,77 @@
 		describe('should be able to', function () {
 
 			it('start and stop', function(){
-				Watch.start();
-				expect(Watch.isRunning).toBe(1);
-				Watch.stop();
-				expect(Watch.isRunning).toBe(0);
-				Watch.reset()
+				watch.start();
+				expect(watch.isRunning).toBe(1);
+				watch.stop();
+				expect(watch.isRunning).toBe(0);
+				watch.reset()
 			})
 
 			it('measure the time elapsed', function(done){
-				Watch.start();
+				watch.start();
 				setTimeout(function(){
-					Watch.stop(); 
-					expect(Watch.timeElapsed>10).toBe(true);
-					Watch.reset()
+					watch.stop(); 
+					expect(watch.timeElapsed>10).toBe(true);
+					watch.reset()
 					done();
 				},50)
 			})
 			it('be able to be restarted at the last stopped time', function(done){
-				Watch.start();
+				watch.start();
 				setTimeout(function(){
-					Watch.stop()
-					Watch.start()
-					expect(Watch.timeElapsed >= 80).toBe(true)
-					Watch.reset()
+					watch.stop()
+					watch.start()
+					expect(watch.timeElapsed >= 80).toBe(true)
+					watch.reset()
 					done()
 				}, 100)
 
 			})
 			it('be able to be reset to 0', function(done){
-				Watch.start()
+				watch.start()
 				setTimeout(function(){
-					Watch.reset();
-					expect(Watch.timeElapsed).toBe(0);
+					watch.reset();
+					expect(watch.timeElapsed).toBe(0);
 					done()
 				}, 100)
 			})
 			it('return the time elapsed when lap button is clicked it', function(done){
-				Watch.start();
+				watch.start();
 				setTimeout(function(){
-					expect(Watch.lap()>=Watch.timeElapsed).toBe(true);
+					expect(watch.lap()>=watch.timeElapsed).toBe(true);
 					done()
-					Watch.stop()
-					Watch.reset()
+					watch.stop()
+					watch.reset()
 				},50)
 			})
 			it('store successive laps and return them in an array', function(done){
-				Watch.start();
+				watch.start();
 				var id = setInterval(function(){
-					Watch.lap()
+					watch.lap()
 				},50);
 				setTimeout(function(){
 					clearInterval(id);
 					for (var i = 0; i < 5; i++){
-						expect(Watch.lapArray[i]>=50*i).toBe(true);
+						expect(watch.lapArray[i]>=50*i).toBe(true);
 					}
 					done();
-					Watch.stop();
-					Watch.reset()
+					watch.stop();
+					watch.reset()
 				}, 500);
 			})
 
 			it('return array of svg', function(){
-				Watch.timeElapsed = 61000;
-					expect(Watch.getTime()).toEqual([svg[0],svg[1],svg[10],svg[0],svg[1]])
+				watch.timeElapsed = 61000;
+					expect(watch.getTime()).toEqual([svg[0],svg[1],svg[10],svg[0],svg[1]])
 			})
 
 			it('draws the digits in dom', function(){
-				Watch.timeElapsed = 61000;
-				Watch.draw();
+				watch.timeElapsed = 61000;
+				watch.draw();
 				var elements = document.getElementsByTagName('path')
 				for(var i = 0; i < elements.length; i++){
-					expect(elements[i].toString()).toBe(Watch.getTime()[i])
+					expect(elements[i].toString()).toBe(watch.getTime()[i])
 				}
 
 			})
