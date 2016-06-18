@@ -8,7 +8,6 @@ var watch = {
 		sketcher.init();
 		this.timeElapsed = 0;	
 		this.lapArray = [];
-		return laps
 	},
 	start: function(){
 		this.init();

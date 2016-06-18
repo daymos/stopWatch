@@ -9,7 +9,7 @@
 				expect(watch.isRunning).toBe(1);
 				watch.stop();
 				expect(watch.isRunning).toBe(0);
-				watch.reset()
+				watch.init()
 			})
 
 			it('measure the time elapsed', function(done){
@@ -17,7 +17,7 @@
 				setTimeout(function(){
 					watch.stop(); 
 					expect(watch.timeElapsed>10).toBe(true);
-					watch.reset()
+					watch.init()
 					done();
 				},50)
 			})
@@ -27,15 +27,15 @@
 					watch.stop()
 					watch.start()
 					expect(watch.timeElapsed >= 80).toBe(true)
-					watch.reset()
+					watch.init()
 					done()
 				}, 100)
 
 			})
-			it('be able to be reset to 0', function(done){
+			it('be able to be init to 0', function(done){
 				watch.start()
 				setTimeout(function(){
-					watch.reset();
+					watch.init();
 					expect(watch.timeElapsed).toBe(0);
 					done()
 				}, 100)
@@ -46,7 +46,7 @@
 					expect(watch.lap()>=watch.timeElapsed).toBe(true);
 					done()
 					watch.stop()
-					watch.reset()
+					watch.init()
 				},50)
 			})
 			it('store successive laps and return them in an array', function(done){
@@ -61,7 +61,7 @@
 					}
 					done();
 					watch.stop();
-					watch.reset()
+					watch.init()
 				}, 500);
 			})
 
