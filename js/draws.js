@@ -1,5 +1,5 @@
 var sketcher = {
-	svg:[],
+svg:[],
 	init: function(){
 		this.svg = pathLib.generate()
 	},
@@ -31,8 +31,8 @@ var sketcher = {
 
 		displayTime.forEach(function(el,index){
 			path = document.getElementById('digit'+index)
-			path.setAttributeNS(null, "d", el);
-		})
+				path.setAttributeNS(null, "d", el);
+			})
 		var filling = setInterval(this.fill,0)
 		var unfillFunc = this.unfill
 		setTimeout(function(){
@@ -44,7 +44,7 @@ var sketcher = {
 		}, 500, unfillFunc)
 	},
 	fill: function(){
-		for(var i = 0; i <500;i++){
+		for(var i = 0; i <100;i++){
 			var randX = Math.floor(Math.random()*825)
 			var randY = Math.floor(Math.random()*1100-100)
 			var index = Math.floor(Math.random()*5)
@@ -61,12 +61,18 @@ var sketcher = {
 		}
 	},
 	unfill: function(){
-		for(var i = 0; i <500;i++){ 
-			var index = Math.floor(Math.random()*5)
+	for(var i = 0; i <300;i++){ 
+		var index = Math.floor(Math.random()*5)
 			var svg = document.getElementById('svg'+index)
 			if(svg.childNodes.length>1){
 				svg.removeChild(svg.firstChild)
 			} 
 		}
+	},
+updateLap: function(lapString){
+		console.log(lapString)
+		try {
+		       	document.getElementById('laps').innerHTML = 'lapString'
+		}catch(e){console.log(e)}
 	}
 }

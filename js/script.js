@@ -29,22 +29,13 @@ var watch = {
 		if(this.isRunning){
 			this.isRunning = 0;	
 			clearInterval(this.interval);
-			var lapString = 'Laps: '
-			this.lapArray.forEach(function(lap, i){
-				if(i>0){
-					lapString += ', '+ (lap/1000) + ' secs'
-				} else {
-					lapString += (lap/1000) + ' secs'
-				}
-			})
-			return this.lapArray
+			sketcher.updateLap(String(this.lapArray))	
 		}
 	},
 	lap: function(){
 		if(this.isRunning){
 			var record = this.timeElapsed;
 			this.lapArray.push(record)
-			return record;
 		}
 	},
 	getTime: function(){
