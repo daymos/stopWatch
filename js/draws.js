@@ -5,22 +5,24 @@ var sketcher = {
 	},
 	selectPaths: function(time){
 		var minutes = time[0]	
-		var seconds = time[1]	
+		var seconds = time[1]
+		console.log(minutes, seconds)
 		var output = [];
 		if (minutes<10){
 			output.push(this.svg[0]);
 			output.push(this.svg[minutes]);
 		} else {
-			output.push(this.svg[minutes]);
-			output.push(this.svg[minutes]);
+			output.push(this.svg[minutes.toString().split('')[0]]);
+			output.push(this.svg[minutes.toString().split('')[1]]);
+			
 		}
 		output.push(this.svg[10]);
 		if (seconds<10){
 			output.push(this.svg[0]);
 			output.push(this.svg[seconds]);
 		} else {
-			output.push(this.svg[seconds]);
-			output.push(this.svg[seconds]);
+			output.push(this.svg[seconds.toString().split('')[0]]);
+			output.push(this.svg[seconds.toString().split('')[1]]);
 		}
 		return output
 	},
