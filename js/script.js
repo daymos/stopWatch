@@ -38,7 +38,7 @@ var watch = {
 		if(this.isRunning){
 			var record = this.timeElapsed;
 			this.lapArray.push(record)
-			if (lapArray.length>1){
+			if (this.lapArray.length>1){
 					this.lapString += ', '+ (record/1000) + ' secs'
 			} else {
 				this.lapString += (record/1000) + ' secs'
