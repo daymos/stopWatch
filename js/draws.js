@@ -4,7 +4,7 @@ var sketcher = {
 		this.svg = pathLib.generate()
 	},
 	printLaps: function(str){
-		document.getElementById('laps').innerHTML = str
+		document.getElementById('laps').innerHTML = str;
 	},
 	selectPaths: function(time){
 		var minutes = time[0]	

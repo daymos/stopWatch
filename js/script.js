@@ -9,6 +9,7 @@ var watch = {
 		this.timeElapsed = 0;	
 		this.lapArray = [];
 		this.lapString = 'Laps: ';
+		sketcher.printLaps(this.lapString);
 	},
 	start: function(){
 		this.init();
