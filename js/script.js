@@ -8,6 +8,8 @@ var watch = {
 		sketcher.init();
 		this.timeElapsed = 0;	
 		this.lapArray = [];
+		this.lapString = 'Laps: ';
+		sketcher.printLaps(this.lapString);
 	},
 	start: function(){
 		this.init();
@@ -27,23 +29,22 @@ var watch = {
 	},
 	stop: function(){
 		if(this.isRunning){
+			this.lap()
 			this.isRunning = 0;	
 			clearInterval(this.interval);
-			var lapString = 'Laps: '
-			this.lapArray.forEach(function(lap, i){
-				if(i>0){
-					lapString += ', '+ (lap/1000) + ' secs'
-				} else {
-					lapString += (lap/1000) + ' secs'
-				}
-			})
-			return this.lapArray
+			sketcher.printLaps(this.lapString)
 		}
 	},
 	lap: function(){
 		if(this.isRunning){
 			var record = this.timeElapsed;
 			this.lapArray.push(record)
+			if (this.lapArray.length>1){
+					this.lapString += ', '+ (record/1000) + ' secs'
+			} else {
+				this.lapString += (record/1000) + ' secs'
+			}
+			sketcher.printLaps(this.lapString)
 			return record;
 		}
 	},
