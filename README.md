@@ -1,3 +1,6 @@
+## installation
+run npm install to install testing dependencies
+
 ##What?
 
 A Stopwatch!
